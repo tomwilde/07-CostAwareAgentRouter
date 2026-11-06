@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    profiles: ["app"]
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+
+  debug:
+    build: .
+    profiles: ["debug"]
+    ports:
+      - "8501:8501"
+      - "5678:5678"
+    volumes:
+      - ./:/app
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+    command: >
+      sh -c "pip install --no-cache-dir debugpy . &&
+      python -m debugpy --listen 0.0.0.0:5678 --wait-for-client
+      -m streamlit run app.py --server.port=8501 --server.address=0.0.0.0"
+
