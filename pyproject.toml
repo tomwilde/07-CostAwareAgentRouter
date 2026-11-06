@@ -1,0 +1,27 @@
+[project]
+name = "cost-aware-agent-router"
+version = "0.1.0"
+description = "Streamlit cost-aware agent router demo"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "openai>=1.54.0",
+  "streamlit>=1.40.0",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3.0",
+  "ruff>=0.8.0",
+  "ty>=0.0.1a11",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+markers = [
+  "acceptance: marks end-to-end acceptance tests",
+]
+
+[tool.ruff]
+line-length = 100
+
